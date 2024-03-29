@@ -170,3 +170,7 @@ depot/*
 coqui_recipes/*
 local_scripts/*
 coqui_demos/*
+*.txt
+*.wav
+*.metadata
+*.tar.gz

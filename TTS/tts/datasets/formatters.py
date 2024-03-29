@@ -594,6 +594,29 @@ def emotion(root_path, meta_file, ignored_speakers=None):
     return items
 
 
+def stcmds(root_path: str, meta_file: str, **kwargs):
+    data = []
+
+    # Loop through all files in the directory
+    for filename in os.listdir(root_path):
+        # Check if the file is a .txt file
+        if filename.endswith('.txt'):
+            # Construct the full path of the text and wav files
+            text_path = os.path.join(root_path, filename)
+            wav_path = os.path.join(root_path, filename.replace('.txt', '.wav'))
+
+            # Read the text from the .txt file
+            with open(text_path, 'r', encoding='utf-8') as file:
+                text = file.read().strip()
+                
+            speaker_name = filename[8:15]
+
+            # Append the data in the required format
+            data.append({"text": text, "audio_file": wav_path , "speaker_name": speaker_name, "root_path": root_path})
+
+    return data
+
+
 def baker(root_path: str, meta_file: str, **kwargs) -> List[List[str]]:  # pylint: disable=unused-argument
     """Normalizes the Baker meta data file to TTS format
 
